@@ -15,11 +15,20 @@ const Login = (props) =>{
          <Hero>
              <h1>Welcome to your professional community</h1>
              <img src="images/login-hero.svg" alt=""/>
+            
          </Hero>
+         <Form>
+            <Google>
+                <img src="images/google.svg" alt=""/>
+                Sign in with Google
+            </Google>
+         </Form>
+         
      </Section>
  </Container>
     );
 };
+
 
 const Container = styled.div`
     padding:0px;
@@ -135,6 +144,12 @@ const Hero = styled.div`
    }
 `;
 
+const Form = styled.div`
 
+`;
+
+const Google = styled.a`
+    
+`;
 
 export default Login;
