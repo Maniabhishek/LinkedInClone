@@ -129,7 +129,7 @@ const SearchIcon = styled.div`
     `;
 
 const Nav = styled.nav`
-        margin-left:auto;
+        /* margin-left:auto; */
         display:block;
         @media (max-width:768px){
             position:fixed;
