@@ -20,7 +20,7 @@ const Header = (props) => {
 
             <Nav>
                 <NavListWrap>
-                    <NavList>
+                    <NavList className='active'>
                         <a href="">
                             <img src="/images/nav-home.svg" alt=""/>
                             <span>Home</span>
@@ -55,10 +55,31 @@ const Header = (props) => {
                         </a>
                     </NavList>
 
+                    <User>
+                        <a href="">
+                            <img src="/images/user.svg" alt=""/>
+                            <span>Me</span>
+                            <img src="/images/down-icon.svg" alt=""/>
+                        </a>
+                        <SignOut>
+                            <a href="">
+                                Sign Out
+                            </a>
+                        </SignOut>
+                    </User>
+                    <Work>
+                        <a href="">
+                            <img src="/images/nav-work.svg" alt=""/>
+                            <span>
+                                Work
+                                <img src="/images/down-icon.svg" alt=""/>
+                            </span>
+                        </a>
+                    </Work>
                 </NavListWrap>
             </Nav>
        </Content>
-   </Container>
+   </Container> 
    );
 }
 
@@ -143,7 +164,21 @@ const Nav = styled.nav`
 const NavListWrap = styled.ul`
         display:flex;
         flex-wrap:nowrap;
-        list-style-type:none;
+        list-style-type:none; 
+
+        .active{
+            span:after{
+                content:"";
+                transform:scaleX(1);
+                border-bottom:2px solid var(--white ,#fff);
+                bottom:0;
+                left:0;
+                position:absolute;
+                transition:transform 0.2s ease-in-out;
+                width:100px;
+                border-color:rgba(0,0,0,0.9);
+           }
+        }
 
 `;
 
@@ -182,6 +217,55 @@ const NavList = styled.li`
             }
         }
 `;
+
+const SignOut = styled.div`
+        position:absolute;
+        top:45px;
+        background:white;
+        border-radius: 0 0 5px 5px;
+        width:100px;
+        font-size:16px;
+        transition-duration:167ms;
+        text-align:center;
+        display:none;
+        text-decoration:none;
+
+        a{
+            color:black;
+        }
+`;
+
+const User = styled(NavList)`
+    a>svg{
+        width:24px;
+    }
+    a>img{
+        width:24px;
+        height:24px;
+        border-radius:50%;
+
+    }
+
+    a>span{
+        display:flex;
+        align-items:center;
+        
+    }
+
+    &:hover{
+        ${SignOut}{
+            align-items:center;
+            display:flex;
+            justify-content:center;
+
+        }
+    }
+`;
+
+const Work = styled(User)`
+    border-left:1px solid rgba(0,0,0,0.88);
+`;
+
 
 
 export default Header;
