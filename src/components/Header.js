@@ -1,8 +1,11 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
+import {signOutAPI} from "../actions";
 
 const Header = (props) => {
     return(
    <Container>
+       
        <Content>
            <Logo>
             <a href="/home">
@@ -56,13 +59,18 @@ const Header = (props) => {
                     </NavList>
 
                     <User>
-                        <a href="">
-                            <img src="/images/user.svg" alt=""/>
-                            <span>Me</span>
-                            <img src="/images/down-icon.svg" alt=""/>
+                        <a>
+                            { props.user && props.user.photoURL ? (<img src={props.user.photoURL} alt=""/>) :
+                            (<img src="/images/user.svg" alt=""/>)
+
+                            }   
+                            <span>Me
+                            <img src="/images/down-icon.svg" alt=""/> 
+                            </span>
+                            
                         </a>
-                        <SignOut>
-                            <a href="">
+                        <SignOut onClick={()=>props.signOut()}>
+                            <a>
                                 Sign Out
                             </a>
                         </SignOut>
@@ -238,6 +246,7 @@ const SignOut = styled.div`
 const User = styled(NavList)`
     a>svg{
         width:24px;
+        border-radius:50%
     }
     a>img{
         width:24px;
@@ -255,7 +264,7 @@ const User = styled(NavList)`
     &:hover{
         ${SignOut}{
             align-items:center;
-            display:flex;
+            display:flex; 
             justify-content:center;
 
         }
@@ -266,6 +275,14 @@ const Work = styled(User)`
     border-left:1px solid rgba(0,0,0,0.88);
 `;
 
+const mapStateToProps = (state) =>{
+    return {
+        user:state.userState.user,
+    }
+}
 
+const mapDispatchToProps =(dispatch) =>({
+    signOut:()=>dispatch(signOutAPI()),
+});
 
-export default Header;
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
